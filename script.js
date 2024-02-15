@@ -72,7 +72,6 @@ const unPerritoQueEncontre = {
   codigo: 1234
 }
 
-
 // destructuramos las propiedades del objeto y las convertimos en variables
 
 // const {nombres de las propiedades} = el objeto del cual extraerlas
@@ -84,9 +83,31 @@ const { breed, name, edad } = unPerritoQueEncontre
 console.log(name, breed, edad)
 
 
-console.log( `${name} es un perrito maravilloso de raza ${breed} y tiene ${edad} añitos de edad` )
+// console.log( `${name} es un perrito maravilloso de raza ${breed} y tiene ${edad} añitos de edad` )
 
-console.log(`${name} tiene un rating de 11/10`)
+// console.log(`${name} tiene un rating de 11/10`)
+
+
+const otroPerrito = {
+  name: "Cara de Papa",
+  breed: "Pug",
+  edad: 12,
+  codigo: 7896
+}
+
+function describirPerrito({ name, breed, edad }) {
+
+  // const { name, breed, edad } = perrito
+
+  console.log( `${name} es un perrito maravilloso de raza ${breed} y tiene ${edad} añitos de edad` )
+
+  console.log(`${name} tiene un rating de 11/10`)
+
+}
+
+describirPerrito(otroPerrito)
+describirPerrito(unPerritoQueEncontre)
+
 
 
 
@@ -104,3 +125,97 @@ const [ libro1, libro2, libro3 ] = misTresLibrosFavoritos
 console.log(libro1, libro2, libro3)
 
 console.log(`mis libros favoritos son ${libro1}, ${libro2} y ${libro3}`)
+
+
+
+// Operador Spread => ...
+// Esparcir todos los elementos del array, SIN la estructura del array
+
+const someNumbers = [ 4, 8, 15, 16, 23, 42 ];
+
+console.log(someNumbers)
+console.log([ 4, 8, 15, 16, 23, 42 ])
+
+console.log(...someNumbers)
+console.log(4, 8, 15, 16, 23, 42)
+
+
+
+console.log( Math.max(10, 20, 4) )
+console.log( Math.max(...someNumbers) )
+
+
+const students1 = ["fran", "pablo", "meri"]
+const students2 = ["adri", "josep", "abraham"]
+
+
+const allStudents = [...students1, ...students2]
+console.log(allStudents)
+
+
+const someNumbers2 = [ 4, 8, 15, 16, 23, 42 ];
+
+const clone = [...someNumbers2]
+
+const reversedNumbers = clone.reverse()
+console.log(reversedNumbers)
+console.log(someNumbers2)
+
+
+const people = [
+  {
+    username: "jorge",
+    candy: 10,
+  }, // ref. abcd
+  {
+    username: "juliette",
+    candy: 20,
+  }, // ref. fvcd
+  {
+    username: "leidy",
+    candy: 15,
+  } // ref. erfs
+] // ref. 1234
+
+
+// const cloneArr = [...people] // shallow clone (map, slice) Solo se copia la primera referencia
+const cloneArr = JSON.parse(JSON.stringify(people)) // deep clone. se copian TODAS las referencias tanto la primero como anidadas
+cloneArr.pop() // hago una modificacion sobre la data del primer nivel
+console.log("clone", cloneArr)
+console.log(people)
+
+cloneArr[0].candy = 100; // hago una modificacion sobre un elemento (objeto) anidado
+console.log("clone", cloneArr)
+console.log("original", people)
+
+
+// Operador Rest (...) => El resto de...
+
+const hobbies = ["surfear", "cocinar", "gaming", "escalar", "juegos de mesa"];
+
+
+const [ miPrimerHobby , miSegundoHobby, ...otrosHobbies ] = hobbies
+console.log(miPrimerHobby, miSegundoHobby)
+
+console.log(otrosHobbies)
+
+function verificarSiPaso(...todasLasNotas) {
+  console.log(todasLasNotas)
+  // 0 - 10.
+  // si es ocho paso
+  let notaTotal = 0
+  todasLasNotas.forEach((eachNota) => {
+    notaTotal += eachNota
+  })
+  if (notaTotal >= 8) {
+    console.log("El estudiante aprobó")
+  } else {
+    console.log("el estudiante no aprobó")
+  }
+}
+
+
+verificarSiPaso( 2, 4 )
+verificarSiPaso( 6, 2 )
+verificarSiPaso( 3, 2, 3 )
+verificarSiPaso( 9 )
